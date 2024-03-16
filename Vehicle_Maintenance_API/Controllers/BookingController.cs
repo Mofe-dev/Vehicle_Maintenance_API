@@ -59,5 +59,41 @@ namespace Vehicle_Maintenance_API.Controllers
         }
 
 
+
+        [HttpGet]
+        [Route("GetBookings")]
+        public JsonResult GetBookings(string plateNumber)
+        {
+            try
+            {
+                ModelResponse objResult = new();
+
+
+
+                if (_MasterEntityRepository == null)
+                {
+                    objResult.Status = new { Code = 500, Message = "Repositorio no inicializado." };
+                    objResult.Info = new { Datetime = DateTime.Now, AcceptedUser = false };
+                    return Json(objResult);
+                }
+
+                var _result = _MasterEntityRepository.GetBookings(plateNumber);
+
+                objResult.Data = _result;
+                objResult.Status = new { Code = 200, Message = "Ok" };
+                objResult.Info = new { Datetime = DateTime.Now, AcceptedUser = true };
+
+                return Json(objResult); ;
+
+            }
+            catch (Exception e)
+            {
+                ModelResponse objresult = new ModelResponse();
+                objresult.Status = new { Code = 406, Message = e.Message };
+                objresult.Info = new { Datetime = DateTime.Now, AcceptedUser = true };
+                return Json(objresult);
+            }
+        }
+
     }
 }

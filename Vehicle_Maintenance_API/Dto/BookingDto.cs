@@ -5,7 +5,7 @@
         public Guid? BookingId { get; set; }
         public required string PlateNumber { get; set; }
         public required string BookingDate { get; set; }
-        public required Guid? BookingStatus { get; set; }
+        public required Guid? BookingStatusId { get; set; }
         public required string Hour { get; set; }
 
 
